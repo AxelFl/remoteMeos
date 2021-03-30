@@ -21,7 +21,7 @@ def get_card_data(si):
 
 def convert_card_data(card_data, card_number, card_type):  # Returns as byte-like 
     # Standard stuff first
-    total_data = reverse_bytes(card_type, 8)  # Cardtype ????, should just work?
+    total_data = reverse_byte_like(card_type, 8)  # Cardtype ????, should just work?
 
     total_data += reverse_bytes(len(card_data["punches"]), 16)  # Number of punches
 
@@ -45,7 +45,7 @@ def send_card_data(data, TCP_IP, TCP_PORT):
     s.close()
 
 
-def reverse_bytes(data, width):
+def reverse_bytes(data, width):  # Binary string to reverse
     binary = '{:0{width}b}'.format(data, width=width)  # Make into binary string and pad with zeroes
     byte = []
     for i in range(0, len(binary), 8):
@@ -53,6 +53,12 @@ def reverse_bytes(data, width):
 
     reverse = "".join(byte[::-1])  # Make into binary-string with bytes reversed
     return reverse
+
+
+def reverse_byte_like(data, width):
+    shortened_string = str(data)[2:]
+    print(shortened_string)
+    return reverse_bytes(shortened_string, width)
 
 
 def convert_time(time):  # Datetime.time to deciseconds after 00:00:00
