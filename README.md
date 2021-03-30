@@ -1,8 +1,8 @@
-# distanceMeos
-Script for having a distance readout station and reporting it to MeOS
+# remoteMeos
+Script for having a remote readout station and reporting it to MeOS
 
 ## Requirements
-Requires `python3` and  the package `sireader`. 
+Requires `python3` and the package `sireader`. 
 Python3 can be installed from [python.org](https://python.org) an `sireader`is installed with running `pip3 install sireader`
 
 
