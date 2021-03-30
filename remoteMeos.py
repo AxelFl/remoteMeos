@@ -15,13 +15,15 @@ def get_card_data(si):
 
     # read out card data
     card_data = si.read_sicard()
+    card_data["punches"].insert(0, card_data["start"])
+    card_data["punches"].append(card_data["finish"])
 
     return convert_card_data(card_data, card_number, card_type)
 
 
 def convert_card_data(card_data, card_number, card_type):  # Returns as byte-like 
     # Standard stuff first
-    total_data = reverse_byte_like(card_type, 8)  # Cardtype ????, should just work?
+    total_data = reverse_bytes(64, 8)  # Cardtype ????, should just work?
 
     total_data += reverse_bytes(len(card_data["punches"]), 16)  # Number of punches
 
@@ -56,7 +58,7 @@ def reverse_bytes(data, width):  # Int to reverse binary string
 
 
 def reverse_byte_like(data, width):
-    integer = int(data[1:], 2)
+    integer = int(data[2:], 2)
     print(integer)
     return reverse_bytes(integer, width)
 
