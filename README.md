@@ -5,8 +5,9 @@ Script for having a distance readout station and reporting it to MeOS
 Requires `sireader`, install with `pip3 install sireader`
 
 ## Running script
-First start meOS and go to the SportIdent tab
-Then select TCP in the dropdown menu and press Activate and then at the boton select a port and press Start.
+First start meOS and go to the SportIdent tab.
+
+Then select TCP in the dropdown menu and press Activate and then at the bottom select a port and press Start.
 
 Run with the python script with
 
