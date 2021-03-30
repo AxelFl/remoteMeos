@@ -1,4 +1,4 @@
-# distanceMeos
+# remoteMeos
 Script for having a distance readout station and reporting it to MeOS
 
 ## Requirements
