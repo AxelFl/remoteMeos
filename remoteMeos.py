@@ -45,7 +45,7 @@ def send_card_data(data, TCP_IP, TCP_PORT):
     s.close()
 
 
-def reverse_bytes(data, width):  # Binary string to reverse
+def reverse_bytes(data, width):  # Int to reverse binary string
     binary = '{:0{width}b}'.format(data, width=width)  # Make into binary string and pad with zeroes
     byte = []
     for i in range(0, len(binary), 8):
@@ -56,9 +56,9 @@ def reverse_bytes(data, width):  # Binary string to reverse
 
 
 def reverse_byte_like(data, width):
-    shortened_string = str(data)[2:]
-    print(shortened_string)
-    return reverse_bytes(shortened_string, width)
+    integer = int(data[1:], 2)
+    print(integer)
+    return reverse_bytes(integer, width)
 
 
 def convert_time(time):  # Datetime.time to deciseconds after 00:00:00
