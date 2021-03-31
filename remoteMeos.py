@@ -1,4 +1,4 @@
-from sireader import SIReader, SIReaderReadout, SIReaderControl
+from sireader import SIReader, SIReaderReadout, SIReaderControl, SIReaderCardChanged
 from time import sleep
 import socket
 import datetime
@@ -95,7 +95,8 @@ def main():
             while not si.poll_sicard():  # Reacts to state changes, so while card is still in reader
                 si.ack_sicard()
                 sleep(0.3)
-        except sireader.SIReaderCardChanged
+        except sireader.SIReaderCardChanged:
+            pass
 
 
 if __name__ == "__main__":
