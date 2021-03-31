@@ -87,13 +87,15 @@ def main():
     si.set_extended_protocol()
 
     while 1:
-        new_data = get_card_data(si)
-        send_card_data(new_data, sys.argv[1], int(sys.argv[2]))
+        try:
+            new_data = get_card_data(si)
+            send_card_data(new_data, sys.argv[1], int(sys.argv[2]))
 
-        # beep when done
-        while not si.poll_sicard():  # Reacts to state changes, so while card is still in reader
-            si.ack_sicard()
-            sleep(0.3)
+            # beep when done
+            while not si.poll_sicard():  # Reacts to state changes, so while card is still in reader
+                si.ack_sicard()
+                sleep(0.3)
+        except sireader.SIReaderCardChanged
 
 
 if __name__ == "__main__":
