@@ -15,8 +15,8 @@ def get_card_data(si):
 
     # read out card data
     card_data = si.read_sicard()
-    card_data["punches"].insert(0, (1, card_data["start"])
-    card_data["punches"].append(2, (card_data["finish"]))
+    card_data["punches"].insert(0, (1, card_data["start"]))
+    card_data["punches"].append((2, card_data["finish"]))
 
     return convert_card_data(card_data, card_number, card_type)
 
