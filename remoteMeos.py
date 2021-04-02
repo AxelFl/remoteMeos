@@ -1,4 +1,4 @@
-from sireader import SIReader, SIReaderReadout, SIReaderControl, SIReaderCardChanged
+from sireader import SIReader, SIReaderReadout, SIReaderControl, SIReaderCardChanged, SIReaderException
 from time import sleep
 import socket
 import datetime
@@ -59,7 +59,6 @@ def reverse_bytes(data, width):  # Int to reverse binary string
 
 def reverse_byte_like(data, width):
     integer = int(data[2:], 2)
-    print(integer)
     return reverse_bytes(integer, width)
 
 
@@ -84,6 +83,7 @@ def main():
     # if this does not work, give the path to the port as an argument
     # see the pyserial documentation for further information.
     si = SIReaderReadout()
+    si.CARD["SI10"]["P1"] = 512  # Fix issue with reading SI10
     si.set_extended_protocol()
 
     while 1:
@@ -95,8 +95,9 @@ def main():
             while not si.poll_sicard():  # Reacts to state changes, so while card is still in reader
                 si.ack_sicard()
                 sleep(0.3)
-        except sireader.SIReaderCardChanged:
-            pass
+
+        except (SIReaderCardChanged, SIReaderException):  # Ignore ETX-byte error, and removing card too fast
+            sleep(5)
 
 
 if __name__ == "__main__":
