@@ -23,7 +23,7 @@ def get_card_data(si):
 
 def convert_card_data(card_data, card_number, card_type):  # Returns as byte-like 
     # Standard stuff first
-    total_data = reverse_bytes(64, 8)  # Cardtype ????, should just work?
+    total_data = reverse_bytes(64, 8)  # Cardtype ????, should just work with 64
 
     total_data += reverse_bytes(len(card_data["punches"]), 16)  # Number of punches
 
@@ -90,11 +90,7 @@ def main():
         try:
             new_data = get_card_data(si)
             send_card_data(new_data, sys.argv[1], int(sys.argv[2]))
-
-            # beep when done
-            while not si.poll_sicard():  # Reacts to state changes, so while card is still in reader
-                si.ack_sicard()
-                sleep(0.3)
+            si.ack_sicard()
 
         except (SIReaderCardChanged, SIReaderException):  # Ignore ETX-byte error, and removing card too fast
             sleep(5)
